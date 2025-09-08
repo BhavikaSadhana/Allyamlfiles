@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-app
+  namespace: bhavana
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: student-app
+  template:
+    metadata:
+      labels:
+        app: student-app
+    spec:
+      containers:
+        - name: student-app
+          image: bhavana686/student-app:v1
+          ports:
+            - containerPort: 80
+       env:
+        - name: MYSQL_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: student-app
+              key: MYSQL_PORT
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: student-app
+              key: MYSQL_HOST
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: student-app
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: student-app
+              key: MYSQL_PASSWORD
+        - name: MYSQL_DB
+          valueFrom:
+            configMapKeyRef:
+              name: student-app
+              key: MYSQL_DB
+

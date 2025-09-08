@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: student-app
+  namespace: bhavana
+spec: 
+  containers:
+    - name: student-app
+      image: bhavana686/student-app:v1
+      ports:
+        - containerPort: 80
